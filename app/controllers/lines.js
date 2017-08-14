@@ -54,7 +54,7 @@ router.get('/', line_list, async (req, res) => {
           .select('tl.*', 'u.first_name', 'u.last_name', 'u.roles', 'u.position', 'u.locked', 'u.email')
           .where(criteriaForList(req))
           .leftJoin('users as u', 'u.id', 'tl.user_id')
-          .orderBy('tl.date_task', 'desc')
+          .orderBy('tl.created_at', 'desc')
           .limit(200)
           .asCallback(callback);
       }

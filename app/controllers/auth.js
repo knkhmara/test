@@ -12,6 +12,17 @@ const jwt = require('jsonwebtoken');
 const User = require('./../models/user');
 
 /* Auth user */
+/**
+ * @route /auth
+ * @method POST
+ * @tags Authorization
+ * @operationId login
+ * @summary Sign In
+ * @description Create new user
+ * @body SignIn
+ * @responses 201user,400validate,200user
+ */
+
 router.post('/', (req, res, next) => {
   const rules = {
     email: 'required|email|email_exist',
@@ -31,9 +42,7 @@ router.post('/', (req, res, next) => {
         if (data) {
           if (bcrypt.compareSync(req.body.password, data.password)) {
             // generate token
-            const token = jwt.sign({ id: data.id }, env.secret, {
-              expiresIn: '120d'
-            });
+            const token = jwt.sign({ id: data.id }, env.secret, { expiresIn: '120d' });
             User.getById(data.id, (err, user) => {
               if (err) return next(err);
               if (user) {
@@ -54,6 +63,15 @@ router.post('/', (req, res, next) => {
 });
 
 /* Me */
+/**
+ * @route /auth/me
+ * @method GET
+ * @tags Authorization
+ * @operationId me
+ * @summary Get information about current user
+ * @headers authorization
+ * @responses 200,401
+ */
 router.get('/me', auth, (req, res) => res.json(req._user));
 
 module.exports = router;

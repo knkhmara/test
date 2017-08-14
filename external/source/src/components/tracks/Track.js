@@ -1,6 +1,5 @@
 import React from 'react';
 import classnames from 'classnames';
-import numeraljs from 'numeraljs';
 
 // Icons
 import FaEllipsis from 'react-icons/lib/fa/ellipsis-h';
@@ -93,7 +92,7 @@ class Track extends React.Component {
               'track__hours--line': view === 'line'
             })}
           >
-            {numeraljs(t.hours).format('0.[00]')} hour(s)
+            {t.hours} hour(s)
           </span>
 
           <TrackLineMenu view={view} t={t} token={token} />
@@ -113,7 +112,12 @@ class Track extends React.Component {
           : null}
 
         {view === 'block'
-          ? <TrackBlockMenu t={t} menuOpen={this.state.menuOpen} toggleMenu={this.toggleMenu} token={token} />
+          ? <TrackBlockMenu
+              t={t}
+              menuOpen={this.state.menuOpen}
+              toggleMenu={this.toggleMenu}
+              token={token}
+            />
           : null}
 
       </div>

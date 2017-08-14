@@ -32,6 +32,4 @@ exports.up = knex => {
   ]);
 };
 
-exports.down = knex => {
-  return knex.table('skills').truncate();
-};
+exports.down = knex => {};

@@ -1,4 +1,3 @@
-import { each } from 'lodash';
 // Api services
 import {
   getTracksApi,
@@ -38,21 +37,11 @@ export function getTracks(token, filters = getInitFiltersForTrack()) {
   };
 }
 
-export function setVars(vars) {
-  return dispatch => {
-    let newPayload = {};
-    each(vars, (item, key) => {
-      newPayload[key] = item;
-    });
-    dispatch({ type: 'NEED_UPD_LIST', payload: newPayload });
-  };
-}
-
 export function changeTrackStatus(token, id, status) {
   return dispatch => {
     changeTrackStatusApi(token, id, status).then(resp => {
       if (resp.status >= 200 && resp.status < 300) {
-        dispatch({ type: 'NEED_UPD_LIST', payload: { _need_upd_list: true } });
+        dispatch(getTracks(token));
       }
     });
   };
@@ -62,7 +51,7 @@ export function removeTrack(id, token) {
   return dispatch => {
     deleteTrackApi(id, token).then(resp => {
       if (resp.status >= 200 && resp.status < 300) {
-        dispatch({ type: 'NEED_UPD_LIST', payload: { _need_upd_list: true } });
+        dispatch(getTracks(token));
         dispatch(toggleConfirm(false, 'text'));
       } else {
         dispatch(setErrors({ deleteTrack: true }));
@@ -94,7 +83,7 @@ export function updateTrack(data, token) {
   return dispatch => {
     updateTrackApi(data, token).then(resp => {
       if (resp.status >= 200 && resp.status < 300) {
-        dispatch({ type: 'NEED_UPD_LIST', payload: { _need_upd_list: true } });
+        dispatch(getTracks(token));
         dispatch(toggleChangeTrack(false));
       } else {
         if (resp.status === 404) {

@@ -1,15 +1,10 @@
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon');
+//const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const knex = require('./app/libs/knex');
-const { map } = require('lodash');
-
 const app = express();
-
-app.settings['x-powered-by'] = false;
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -19,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+require('./swagger_lib')(app, __dirname, 'app/controllers');
 require('./app/routes')(app);
 
 // catch 404 and forward to error handler
@@ -47,23 +43,5 @@ app.use(function(err, req, res, next) {
       break;
   }
 });
-
-if (!module.parent) {
-  app.listen(process.env.PORT || 1337, () => {
-    console.log('Listen on %s', 1337);
-    knex.migrate
-      .latest()
-      .then(data => {
-        console.log(
-          '--- Migrated knex files:',
-          data[1].length ? map(data[1], item => path.basename(item)).toString() : 0
-        );
-      })
-      .catch(e => {
-        console.log('--- Error knex migrations', e);
-        process.exit(1);
-      });
-  });
-}
 
 module.exports = app;
