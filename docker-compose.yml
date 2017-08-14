@@ -1,0 +1,28 @@
+version: '2'
+services:
+  mysql:
+    image: mysql:5.7.18
+    container_name: ets-mysql
+    environment:
+      MYSQL_DATABASE: ets
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: 1
+    volumes:
+      - ~/.ets-databases:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  adminer:
+    image: asergey/adminer-128:1.0.0
+    container_name: ets-adminer
+    ports:
+      - "3308:80"
+    links:
+      - mysql:db
+#  nginx:
+#    image: nginx:1.13.1-alpine
+#    container_name: ets-nginx
+#    volumes:
+#      - ./external/nginx-sites.conf:/etc/nginx/nginx.conf:ro
+#      - ./public:/var/www/sites/public
+#    ports:
+#      - "1337:80"

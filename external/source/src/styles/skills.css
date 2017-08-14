@@ -1,0 +1,59 @@
+.skills {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 2px;
+  padding: 0 20px 20px 20px;
+}
+
+.skills-wrapper {
+  padding: 15px 0;
+  border-bottom: 1px solid rgb(4, 174, 230);
+}
+
+.skills__parent {
+  color: #212121;
+  font-size: 18px;
+}
+
+.skills__children {
+  color: #424242;
+  font-size: 14px;
+  padding-left: 10px;
+}
+
+.skills__add {
+  border: none;
+  outline: none;
+  background: #ffffff;
+  text-decoration: none;
+  margin-top: 10px;
+  display: block;
+  color: rgb(4, 174, 230);
+  margin-left: 5px;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+}
+
+.skillsadd__btn {
+  cursor: pointer;
+  color: #00897b;
+  font-size: 28px;
+  border: none;
+  margin-left: 5px;
+}
+
+.skillsadd__input {
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  min-width: 200px;
+  border: none;
+  background: #00897b;
+  border-radius: 2px;
+  color: #ffffff;
+  outline: none;
+  box-shadow: none;
+}

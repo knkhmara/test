@@ -1,0 +1,94 @@
+.topbar {
+  height: 50px;
+  background: #ffffff;
+  width: 100%;
+  box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.topbar__headline {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 14px;
+  color: #424242;
+  padding-left: 20px;
+}
+
+.topbar__icons {
+  padding-right: 20px;
+  position: relative;
+}
+
+.topbar__icon {
+  cursor: pointer;
+  padding: 5px;
+  transition: all 0.2s;
+  opacity: 1;
+}
+
+.topbar__icon:hover {
+  transform: scale(1.4);
+}
+
+.topbar__icon--active {
+  color: #424242;
+}
+
+.topbar__menu--wrapper {
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
+
+.topbar__menu {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.topbar__menu--btn {
+  font-size: 20px;
+  text-decoration: none;
+  padding: 0;
+  width: 50px;
+  background: red;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  opacity: 0.7;
+  transition: all 0.2s;
+}
+
+.topbar__menu--btn svg {
+  transition: all 0.2s;
+}
+
+.topbar__menu--btn:hover svg {
+  transform: scale(1.4);
+}
+
+.topbar__menu--active {
+  opacity: 1;
+}
+
+.logout {
+  padding-left: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout:hover {
+  transform: scale(1.4);
+}

@@ -1,0 +1,69 @@
+.bgErrorSelect .Select-control {
+  background: #FFCDD2;
+}
+
+.Select-control {
+  min-height: 30px;
+  box-shadow: -1px 0px 1px rgba(0, 0, 0, 0.1);
+  border: none;
+  outline: none;
+  margin: 5px 0 0 0;
+  padding: 5px 5px;
+  border-radius: 2px;
+  font-size: 14px;
+}
+
+.Select-input {
+  height: 30px;
+  padding-left: 5px;
+}
+
+.Select-multi-value-wrapper {
+  min-height: 30px;
+}
+
+.Select--multi .Select-value {
+  margin-top: 4px;
+}
+
+.Select-menu-outer {
+  font-size: 14px;
+  color: #212121;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 3px;
+  border: none;
+  border-top: 1px solid #00BFA5;
+}
+
+.Select-value {
+  color: #212121 !important;
+}
+
+.Select-option {
+  color: #212121 !important;
+}
+
+.is-open > .Select-control .Select-arrow {
+  border-color: transparent transparent #00BFA5;
+}
+
+.Select-clear-zone, .Select-clear-zone:hover {
+  color: #00BFA5;
+}
+
+.Select-arrow {
+  border-color: #00BFA5 transparent transparent;
+}
+
+.is-open .Select-arrow, .Select-arrow-zone:hover > .Select-arrow {
+  border-top-color: #00BFA5;
+}
+
+.Select-placeholder, .Select--single > .Select-control .Select-value {
+  display: flex;
+  align-items: center;
+}
+
+.Select-input > input {
+  padding: 6px 0 12px;
+}
