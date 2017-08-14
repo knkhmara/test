@@ -2,7 +2,7 @@
 const Validator = require('./Validator');
 const env = require('./../../config');
 const bcrypt = require('bcrypt-nodejs');
-const { pick } = require('lodash');
+const _ = require('lodash');
 const salt = bcrypt.genSaltSync();
 
 module.exports = (req, res, next) => {
@@ -18,12 +18,16 @@ module.exports = (req, res, next) => {
   const validate = new Validator(req.body, rules);
 
   validate.passes(() => {
-    let vars = pick(req.body, ['first_name', 'last_name', 'email', 'rate']);
+    let vars = _.pick(req.body, ['first_name', 'last_name', 'email', 'rate']);
     vars.roles = req.body.roles.join(',');
     vars.position = req.body.position.join(',');
+    vars.created_at = new Date();
+    vars.updated_at = new Date();
     vars.password = bcrypt.hashSync(req.body.password, salt);
     req._vars = vars;
     next();
   });
-  validate.fails(() => res.status(400).send(validate.errors));
+  validate.fails(() => {
+    return res.status(400).send(validate.errors);
+  });
 };

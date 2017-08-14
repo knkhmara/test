@@ -12,7 +12,6 @@ import Login from './general/Login';
 import NotFound from './general/NotFound';
 import Confirm from './general/Confirm';
 import PrivateRoute from './general/PrivateRoute';
-import SkillsUser from "./skills/SkillsUser";
 
 // Actions
 import { setToken } from './../store/actions/generalActions';
@@ -29,7 +28,6 @@ class App extends React.Component {
           <PrivateRoute exact path="/tracks" component={Tracks} props={this.props} />
           <PrivateRoute exact path="/users" component={Users} props={this.props} />
           <PrivateRoute exact path="/skills" component={Skills} props={this.props} />
-          <PrivateRoute exact path="/user-skills" component={SkillsUser} props={this.props} />
           <Route exact path="/login" component={Login} />
           <Route component={NotFound} />
         </Switch>

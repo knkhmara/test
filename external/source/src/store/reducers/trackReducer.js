@@ -1,25 +1,25 @@
 // Types
 import {
   SET_TRACKS,
-  SET_PROJECTS,
   TOGGLE_CHANGE_TRACK,
   TOGGLE_TRACK_FILTERS,
   SET_WORK_TYPES,
   SET_STATUS_TYPES,
   SET_TRACK_FILTER,
   CLEAR_TRACK_FILTERS,
-  CHANGE_TRACK_VIEW,
-  NEED_UPD_LIST
+  CHANGE_TRACK_VIEW
 } from './../actions/types';
 
 // Helpers
-import { getInitFiltersForTrack, getInitNewTrackData } from './../../shared/HelpService';
+import {
+  getInitFilters,
+  getInitNewTrackData
+} from './../../shared/HelpService';
 
-const initFilters = getInitFiltersForTrack();
+const initFilters = getInitFilters();
 const initTrackData = getInitNewTrackData();
 const view = localStorage.getItem('viewType');
 const initial = {
-  _need_upd_list: false,
   tracks: [],
   workTypes: [],
   statusTypes: [],
@@ -33,8 +33,6 @@ const initial = {
 
 export default function trackReducer(state = initial, action = {}) {
   switch (action.type) {
-    case NEED_UPD_LIST:
-      return Object.assign({}, state, action.payload);
     case SET_TRACKS:
       return Object.assign({}, state, { tracks: action.tracks });
     case CHANGE_TRACK_VIEW:
@@ -47,8 +45,6 @@ export default function trackReducer(state = initial, action = {}) {
       });
     case SET_STATUS_TYPES:
       return Object.assign({}, state, { statusTypes: action.statusTypes });
-    case SET_PROJECTS:
-      return Object.assign({}, state, { projects: action.projects });
     case SET_WORK_TYPES:
       return Object.assign({}, state, { workTypes: action.workTypes });
     case TOGGLE_CHANGE_TRACK:

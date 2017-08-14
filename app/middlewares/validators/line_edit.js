@@ -1,5 +1,5 @@
 'use strict';
-const { pick } = require('lodash');
+const _ = require('lodash');
 const Validator = require('./Validator');
 const env = require('./../../config');
 const knex = require('./../../libs/knex');
@@ -8,11 +8,11 @@ const hasRole = require('./../../libs/hasRole');
 module.exports = (req, res, next) => {
   const rules = {
     id: 'required|integer|min:0',
-    project: 'required|min:2|max:60',
-    task: 'required|min:3|max:255',
+    project: 'required|min:2',
+    task: 'required|min:3',
     type_work: 'required|in:' + env.type_works.join(','),
     hours: 'required|numeric|min:0',
-    date_task: 'required|regex:/^\\d{4}-\\d{2}-\\d{2}$/|my_date'
+    date_task: 'required|regex:/^\\d{4}-\\d{2}-\\d{2}$/|date'
   };
   const validate = new Validator(req.body, rules);
   if (validate.fails()) {
@@ -30,7 +30,8 @@ module.exports = (req, res, next) => {
       .count('* as c')
       .then(count => {
         if (count.c) {
-          let vars = pick(req.body, ['project', 'task', 'type_work', 'hours', 'date_task']);
+          let vars = _.pick(req.body, ['project', 'task', 'type_work', 'hours', 'date_task']);
+          vars.updated_at = new Date();
           vars.status = 'Open';
           req._vars = vars;
           next();

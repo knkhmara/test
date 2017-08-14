@@ -1,4 +1,3 @@
-import { each } from 'lodash';
 // Api services
 import {
   getTracksApi,
@@ -23,14 +22,13 @@ import {
   CLEAR_TRACK_FILTERS,
   CHANGE_TRACK_VIEW,
   SET_ROLES,
-  SET_POSITIONS,
-  SET_PROJECTS
+  SET_POSITIONS
 } from './types';
 
 // Helpers
-import { getInitFiltersForTrack } from './../../shared/HelpService';
+import { getInitFilters } from './../../shared/HelpService';
 
-export function getTracks(token, filters = getInitFiltersForTrack()) {
+export function getTracks(token, filters = getInitFilters()) {
   return dispatch => {
     getTracksApi(token, filters).then(resp => {
       if (resp.data) dispatch(setTracks(resp.data));
@@ -38,21 +36,11 @@ export function getTracks(token, filters = getInitFiltersForTrack()) {
   };
 }
 
-export function setVars(vars) {
-  return dispatch => {
-    let newPayload = {};
-    each(vars, (item, key) => {
-      newPayload[key] = item;
-    });
-    dispatch({ type: 'NEED_UPD_LIST', payload: newPayload });
-  };
-}
-
 export function changeTrackStatus(token, id, status) {
   return dispatch => {
     changeTrackStatusApi(token, id, status).then(resp => {
       if (resp.status >= 200 && resp.status < 300) {
-        dispatch({ type: 'NEED_UPD_LIST', payload: { _need_upd_list: true } });
+        dispatch(getTracks(token));
       }
     });
   };
@@ -62,7 +50,7 @@ export function removeTrack(id, token) {
   return dispatch => {
     deleteTrackApi(id, token).then(resp => {
       if (resp.status >= 200 && resp.status < 300) {
-        dispatch({ type: 'NEED_UPD_LIST', payload: { _need_upd_list: true } });
+        dispatch(getTracks(token));
         dispatch(toggleConfirm(false, 'text'));
       } else {
         dispatch(setErrors({ deleteTrack: true }));
@@ -94,7 +82,7 @@ export function updateTrack(data, token) {
   return dispatch => {
     updateTrackApi(data, token).then(resp => {
       if (resp.status >= 200 && resp.status < 300) {
-        dispatch({ type: 'NEED_UPD_LIST', payload: { _need_upd_list: true } });
+        dispatch(getTracks(token));
         dispatch(toggleChangeTrack(false));
       } else {
         if (resp.status === 404) {
@@ -109,19 +97,14 @@ export function updateTrack(data, token) {
   };
 }
 
-export function getLibraries(token, onlyProjects) {
+export function getLibraries(token) {
   return dispatch => {
     getDictionariesApi(token).then(resp => {
       if (resp) {
-        if (onlyProjects) {
-          dispatch(setProjects(resp.projects));
-        } else {
-          dispatch(setWorkTypes(resp.type_works));
-          dispatch(setStatusTypes(resp.task_status));
-          dispatch(setRoles(resp.roles));
-          dispatch(setPositions(resp.positions));
-          dispatch(setProjects(resp.projects));
-        }
+        dispatch(setWorkTypes(resp.type_works));
+        dispatch(setStatusTypes(resp.task_status));
+        dispatch(setRoles(resp.roles));
+        dispatch(setPositions(resp.positions));
       }
     });
   };
@@ -187,12 +170,6 @@ function setPositions(positions) {
   return {
     type: SET_POSITIONS,
     positions
-  };
-}
-function setProjects(projects) {
-  return {
-    type: SET_PROJECTS,
-    projects
   };
 }
 

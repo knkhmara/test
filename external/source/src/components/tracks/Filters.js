@@ -6,17 +6,19 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import './../../../node_modules/moment/locale/en-gb';
-import { filter } from 'lodash';
 
 // Actions
-import { toggleTrackFilters, setTrackFilters } from './../../store/actions/trackActions';
+import {
+  toggleTrackFilters,
+  setTrackFilters
+} from './../../store/actions/trackActions';
 import { getUsers } from './../../store/actions/userActions';
 
 // Helpers
-import { getInitFiltersForTrack } from './../../shared/HelpService';
+import { getInitFilters } from './../../shared/HelpService';
 
 class Filters extends React.Component {
-  state = Object.assign({}, getInitFiltersForTrack(), { initial: false });
+  state = getInitFilters();
 
   componentDidMount() {
     let { filters } = this.props;
@@ -26,13 +28,12 @@ class Filters extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState(nextProps.filters);
 
-    if (this.state.initial) {
-      return false;
-    }
-
-    const roles = nextProps.activeUser.roles;
-    if (roles && (roles.includes('owner') || roles.includes('pm'))) {
-      this.setState({ initial: true });
+    let roles = nextProps.activeUser.roles;
+    if (
+      nextProps.users.length === 0 &&
+      roles &&
+      (roles.includes('owner') || roles.includes('pm'))
+    ) {
       this.props.getUsers(nextProps.token);
     }
   }
@@ -72,7 +73,12 @@ class Filters extends React.Component {
   };
 
   render() {
-    const { workTypes: wt, statusTypes: st, users: us, activeUser } = this.props;
+    const {
+      workTypes: wt,
+      statusTypes: st,
+      users: us,
+      activeUser
+    } = this.props;
 
     const workTypes = wt.map(v => {
       return {
@@ -88,9 +94,11 @@ class Filters extends React.Component {
       };
     });
 
-    const isOwnerOrPm = activeUser.roles && (activeUser.roles.includes('owner') || activeUser.roles.includes('pm'));
+    const isOwnerOrPm =
+      activeUser.roles &&
+      (activeUser.roles.includes('owner') || activeUser.roles.includes('pm'));
 
-    const users = filter(us, { locked: 0 }).map(v => {
+    const users = us.map(v => {
       return {
         value: v.id,
         label: `${v.first_name} ${v.last_name}`
@@ -116,6 +124,7 @@ class Filters extends React.Component {
             options={statusTypes}
             onChange={this.changeStatus}
           />
+
           {isOwnerOrPm ? <label className="input-headline">User</label> : null}
           {isOwnerOrPm
             ? <Select
@@ -142,7 +151,7 @@ class Filters extends React.Component {
           <DatePicker
             dateFormat="DD-MM-YYYY"
             selected={this.state.endDate}
-            onChange={this.handleChangeEndDate}
+            onChange={this.handleEndChange}
             className="datepicker"
             locale="en-gb"
           />
@@ -168,13 +177,25 @@ class Filters extends React.Component {
           />
 
           <label className="input-headline">Task</label>
-          <input type="text" value={this.state.task} name="task" onChange={this.handleInputChange} className="input" />
+          <input
+            type="text"
+            value={this.state.task}
+            name="task"
+            onChange={this.handleInputChange}
+            className="input"
+          />
         </div>
         <div className="sidebarBtns">
-          <button className="sidebarBtns__btn sidebarBtns__btn--save" onClick={this.handleUseFilters}>
+          <button
+            className="sidebarBtns__btn sidebarBtns__btn--save"
+            onClick={this.handleUseFilters}
+          >
             Apply filters
           </button>
-          <button className="sidebarBtns__btn sidebarBtns__btn--cancel" onClick={this.handleClose}>
+          <button
+            className="sidebarBtns__btn sidebarBtns__btn--cancel"
+            onClick={this.handleClose}
+          >
             Cancel
           </button>
         </div>

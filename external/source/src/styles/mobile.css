@@ -1,13 +1,4 @@
 @media (max-width: 768px) {
-  .topbar__menu--btn {
-    width: 40px;
-  }
-
-  .stats {
-    width: 100%;
-    max-width: 100%;
-  }
-
   .statistic {
     padding: 5px;
   }
@@ -141,9 +132,5 @@
 
   .logout {
     font-size: 18px;
-  }
-
-  .stats {
-    padding: 0 5px;
   }
 }

@@ -42,7 +42,7 @@ router.put('/', user_attach, (req, res, next) => {
         knex('skill_gradation')
           .where({ skill_id: skill_id, user_id: user_id })
           .update({ value: value })
-          .then(() => res.status(202).end())
+          .then(() => res.status(200).end())
           .catch(next);
       } else {
         knex('skill_gradation').insert(req._vars).then(() => res.status(201).end()).catch(next);

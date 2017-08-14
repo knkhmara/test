@@ -1,7 +1,7 @@
 import { parseJSON, formatDateToServer } from './HelpService';
 
-export function getStatPerUser(token, user_id, date) {
-  return fetch('/api/v1/stat/' + user_id + '?month=' + date, {
+export function getStatPerUser(token, user_id) {
+  return fetch('/api/v1/stat/' + user_id + '?month=2017-06-01', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -54,15 +54,7 @@ export function createTrackApi(data, token) {
 }
 
 export function createUserApi(data, token) {
-  let {
-    first_name = '',
-    last_name = '',
-    email = '',
-    roles = '',
-    position = '',
-    rate = 0,
-    password = ''
-  } = data;
+  let { first_name = '', last_name = '', email = '', roles = '', position = '', rate = 0, password = '' } = data;
 
   return fetch('/api/v1/users', {
     method: 'POST',
@@ -83,14 +75,7 @@ export function createUserApi(data, token) {
 }
 
 export function updateUserApi(data, token, status) {
-  let {
-    first_name = '',
-    last_name = '',
-    roles = [],
-    position = [],
-    rate = 0,
-    id = ''
-  } = data;
+  let { first_name = '', last_name = '', roles = [], position = [], rate = 0, id = '' } = data;
 
   let locked = status === 1 ? 1 : 0;
   let userObj = {
@@ -118,14 +103,7 @@ export function updateUserApi(data, token, status) {
 }
 
 export function updateTrackApi(data, token) {
-  let {
-    id = '',
-    project = '',
-    task = '',
-    type_work = '',
-    hours = 0,
-    trackDate
-  } = data;
+  let { id = '', project = '', task = '', type_work = '', hours = 0, trackDate } = data;
 
   return fetch('/api/v1/lines', {
     method: 'PATCH',
@@ -145,15 +123,9 @@ export function updateTrackApi(data, token) {
 }
 
 export function getTracksApi(token, filters) {
-  let {
-    type_work = '',
-    status = '',
-    project = '',
-    task = '',
-    startDate = '',
-    endDate = '',
-    user = ''
-  } = filters ? filters : {};
+  let { type_work = '', status = '', project = '', task = '', startDate = '', endDate = '', user = '' } = filters
+    ? filters
+    : {};
 
   let sDate = startDate ? formatDateToServer(startDate) : '';
   let eDate = endDate ? formatDateToServer(endDate) : '';
@@ -204,31 +176,6 @@ export function getAllSkillsApi(token) {
   }).then(parseJSON);
 }
 
-export function getSkillsFromUserApi(token, user_id) {
-  return fetch(`/api/v1/skills/${user_id}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: token
-    }
-  }).then(parseJSON);
-}
-
-export function attachSkillUser(token, { user_id, skill_id, value }) {
-  return fetch('/api/v1/skills', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: token
-    },
-    body: JSON.stringify({
-      user_id,
-      skill_id,
-      value
-    })
-  });
-}
-
 export function addNewSkillApi(token, parent_id, name, desc) {
   return fetch('/api/v1/skills', {
     method: 'POST',
@@ -240,19 +187,6 @@ export function addNewSkillApi(token, parent_id, name, desc) {
       name,
       parent_id,
       desc
-    })
-  });
-}
-
-export function deleteSkillApi(token, id) {
-  return fetch('/api/v1/skills', {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: token
-    },
-    body: JSON.stringify({
-      id
     })
   });
 }

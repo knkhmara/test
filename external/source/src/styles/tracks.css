@@ -32,7 +32,7 @@
 }
 
 .track__type {
-  color: #607d8b;
+  color: #607D8B;
   font-weight: normal;
   margin: 0;
   font-size: 12px;
@@ -100,15 +100,15 @@
 }
 
 .track__status--open {
-  background: #ffc107;
+  background: #FFC107;
 }
 
 .track__status--accepted {
-  background: #4caf50;
+  background: #4CAF50;
 }
 
 .track__status--declined {
-  background: #ff6e40;
+  background: #FF6E40;
 }
 
 .track__hours {
@@ -166,7 +166,7 @@
   flex-grow: 1;
   cursor: pointer;
   color: #ffffff;
-  background: #00bfa5;
+  background: #00BFA5;
   transition: all 0.2s;
   margin: 0;
 }
@@ -209,38 +209,4 @@
   font-size: 18px;
   margin-left: 20px;
   height: 100%;
-}
-
-.suggestions {
-  width: 100%;
-  box-sizing: border-box;
-  height: 40px;
-}
-
-.suggestions__values {
-  padding: 2px;
-  position: absolute;
-  top: 47px;
-  max-width: 360px;
-  box-sizing: border-box;
-  width: 100%;
-  border-bottom: 2px solid #00897b;
-  background: #a7ffeb;
-  color: #424242;
-  border-radius: 2px;
-  font-size: 14px;
-  max-height: 140px;
-  overflow: scroll;
-}
-
-.suggestions__value {
-  padding: 5px;
-  border-radius: 2px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.suggestions__value-active {
-  background: #00897b;
-  color: #ffffff;
 }

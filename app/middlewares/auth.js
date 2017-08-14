@@ -18,7 +18,7 @@ module.exports = (req, res, next) => {
     jwt.verify(req.headers.authorization, env.secret, (err, decoded) => {
       if (err) return res.status(401).end();
       if (decoded) {
-        require('./../models/user').getById(decoded.id, (err, user) => {
+        require('./../models/user').getUserById(decoded.id, (err, user) => {
           if (err) return next(err);
           req._user = user;
           next();

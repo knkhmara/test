@@ -1,5 +1,4 @@
 // Tracks
-export const NEED_UPD_LIST = 'NEED_UPD_LIST';
 export const SET_TRACKS = 'SET_TRACKS';
 export const TOGGLE_CHANGE_TRACK = 'TOGGLE_CHANGE_TRACK';
 export const TOGGLE_TRACK_FILTERS = 'TOGGLE_TRACK_FILTERS';
@@ -27,7 +26,6 @@ export const SET_USERS = 'SET_USERS';
 export const TOGGLE_CHANGE_USER = 'TOGGLE_CHANGE_USER';
 export const SET_ROLES = 'SET_ROLES';
 export const SET_POSITIONS = 'SET_POSITIONS';
-export const SET_PROJECTS = 'SET_PROJECTS';
 
 // Stats
 export const SET_STAT = 'SET_STAT';

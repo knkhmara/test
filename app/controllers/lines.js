@@ -54,7 +54,7 @@ router.get('/', line_list, async (req, res) => {
           .select('tl.*', 'u.first_name', 'u.last_name', 'u.roles', 'u.position', 'u.locked', 'u.email')
           .where(criteriaForList(req))
           .leftJoin('users as u', 'u.id', 'tl.user_id')
-          .orderBy('tl.date_task', 'desc')
+          .orderBy('tl.created_at', 'desc')
           .limit(200)
           .asCallback(callback);
       }
@@ -79,7 +79,7 @@ router.post('/', line_create, (req, res, next) => {
 
 // Update track-line by id
 router.patch('/', line_edit, (req, res, next) => {
-  knex('track_lines').where({ id: req.body.id }).update(req._vars).then(() => res.status(202).send()).catch(next);
+  knex('track_lines').where({ id: req.body.id }).update(req._vars).then(() => res.send()).catch(next);
 });
 
 // delete track line

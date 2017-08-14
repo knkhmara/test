@@ -6,9 +6,9 @@ const hasRole = require('./../../libs/hasRole');
 module.exports = (req, res, next) => {
   const rules = {
     user: 'integer|min:1',
-    project: 'string|min:2|max:60',
-    date_start: 'regex:/^\\d{4}-\\d{2}-\\d{2}$/|my_date',
-    date_end: 'regex:/^\\d{4}-\\d{2}-\\d{2}$/|my_date|after_or_equal:date_start',
+    project: 'string|min:2',
+    date_start: 'regex:/^\\d{4}-\\d{2}-\\d{2}$/|date',
+    date_end: 'regex:/^\\d{4}-\\d{2}-\\d{2}$/|date',
     status: 'string|in:' + env.task_status.join(','),
     type_work: 'string|in:' + env.type_works.join(',')
   };

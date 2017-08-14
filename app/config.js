@@ -10,13 +10,11 @@ let config = {
     'Study',
     'Testing',
     'Meeting',
-    'Vacation',
-    'SickDay',
-    'DayOff'
+    'Vacation'
   ],
   task_status: ['Accepted', 'Declined', 'Open'],
   roles: ['owner', 'pm', 'member'],
-  positions: ['php', 'nodejs', 'python', 'ios', 'android', 'qa', 'ui/ux', 'fed', 'ba', 'other'],
+  positions: ['php', 'nodejs', 'ios', 'android', 'qa', 'ui/ux', 'fed', 'other'],
   db: {
     client: 'mysql',
     connection: {
@@ -27,8 +25,7 @@ let config = {
       port: '3306'
     },
     migrations: {
-      tableName: 'knex_migrations',
-      directory: './migrations'
+      tableName: 'knex_migrations'
     },
     pool: {
       min: 1,
@@ -36,18 +33,10 @@ let config = {
     }
   }
 };
-
 switch (process.env.NODE_ENV) {
   case 'production':
-    config.db.connection.user = process.env.MYSQL_USER;
-    config.db.connection.password = process.env.MYSQL_PASS;
-    config.db.migrations.directory = process.env.MIGRATION_PATH;
-    break;
-  case 'testing':
-    config.db.connection.host = '127.0.0.1';
-    config.db.connection.user = process.env.MYSQL_USER || 'root';
-    config.db.connection.database = process.env.MYSQL_USER ? 'test' : 'ets_test';
-    config.db.connection.password = process.env.MYSQL_PASSWORD || '1';
+    config.db.connection.user = 'ets';
+    config.db.connection.password = 'ets13#';
     break;
   default:
     break;

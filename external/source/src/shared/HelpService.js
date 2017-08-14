@@ -39,22 +39,6 @@ export function showClearFilters(filters) {
 
 // Get initial filters
 export function getInitFilters() {
-  let dates = [];
-  for (let i = 0; i < 12; i++) {
-    let label_human = moment().subtract(i, 'month').format('YYYY MMM');
-    let raw_label = moment().subtract(i, 'month').format('YYYY-MM-01');
-    dates.push({ value: i, raw_label: raw_label, label: label_human });
-  }
-  return {
-    user: 0,
-    date: moment().format('YYYY-MM-01'),
-    state_selected_date: 0,
-    state_selected_user: null,
-    dates
-  };
-}
-
-export function getInitFiltersForTrack() {
   const startWeek = getStartOfWeek();
   const endWeek = getEndOfWeek();
 

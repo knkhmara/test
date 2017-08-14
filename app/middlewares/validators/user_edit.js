@@ -2,7 +2,7 @@
 const Validator = require('./Validator');
 const env = require('./../../config');
 const bcrypt = require('bcrypt-nodejs');
-const { pick } = require('lodash');
+const _ = require('lodash');
 const salt = bcrypt.genSaltSync();
 
 module.exports = (req, res, next) => {
@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
   const validate = new Validator(req.body, rules);
 
   validate.passes(() => {
-    let vars = pick(req.body, ['id', 'first_name', 'last_name', 'position', 'roles', 'rate', 'locked']);
+    let vars = _.pick(req.body, ['id', 'first_name', 'last_name', 'position', 'roles', 'rate', 'locked']);
     vars.roles = vars.roles.join(',');
     vars.position = req.body.position.join(',');
     vars.updated_at = new Date();

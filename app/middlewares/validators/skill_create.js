@@ -1,6 +1,6 @@
 'use strict';
 const Validator = require('./Validator');
-const { pick } = require('lodash');
+const _ = require('lodash');
 
 module.exports = (req, res, next) => {
   const rules = {
@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
   const validate = new Validator(req.body, rules);
 
   validate.passes(() => {
-    let vars = pick(req.body, ['name', 'parent_id']);
+    let vars = _.pick(req.body, ['name', 'parent_id']);
     if (req.body.desc) {
       vars['desc'] = req.body.desc;
     }

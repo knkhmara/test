@@ -6,7 +6,7 @@ const { getDatesInMounth } = require('./../../helpers');
 module.exports = (req, res, next) => {
   const rules = {
     user_id: 'required|integer|min:1|user_exist',
-    month: 'regex:/^\\d{4}-\\d{2}-01$/|my_date'
+    month: 'regex:/^\\d{4}-\\d{2}-01$/|date'
   };
 
   let params = {
@@ -18,6 +18,7 @@ module.exports = (req, res, next) => {
   validate.passes(() => {
     req.query.month = req.query.month ? moment(req.query.month).format('YYYY-MM') : moment().format('YYYY-MM');
     req.month_days = getDatesInMounth(req.query.month);
+
     next();
   });
   validate.fails(() => res.status(400).send(validate.errors));

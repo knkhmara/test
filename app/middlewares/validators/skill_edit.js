@@ -1,7 +1,7 @@
 'use strict';
 const Validator = require('./Validator');
 const knex = require('./../../libs/knex');
-const { pick } = require('lodash');
+const _ = require('lodash');
 
 module.exports = (req, res, next) => {
   const rules = {
@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
       .count('* as c')
       .then(count => {
         if (count.c) {
-          let vars = pick(req.body, ['name', 'parent_id']);
+          let vars = _.pick(req.body, ['name', 'parent_id']);
           if (req.body.desc) {
             vars['desc'] = req.body.desc;
           }

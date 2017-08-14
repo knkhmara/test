@@ -23,11 +23,9 @@ import './styles/loading.css';
 import './styles/select.css';
 import './styles/statistic.css';
 import './styles/skills.css';
-import './styles/skills-user.css';
-import './styles/range-slider.css';
-import './styles/stats.css';
 import './styles/mobile.css';
 import './styles/general.css';
+import './styles/stats.css';
 
 // Service worker
 import registerServiceWorker from './registerServiceWorker';
