@@ -18,18 +18,6 @@ const listCredentials = [
   [
     {
       user: 'user',
-      project: 'Very looooong titleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee!!!!!!!!',
-      date_start: '2017-07-24',
-      date_end: '2017-07-26',
-      status: 'Open',
-      type_work: 'Development'
-    },
-    400,
-    'Very long project name'
-  ],
-  [
-    {
-      user: 'user',
       project: 'ets',
       date_start: '2017-07-24',
       date_end: '2017-07-26',
@@ -79,66 +67,6 @@ const listCredentials = [
     {
       user: 1,
       project: 'ets',
-      date_start: '2017-07-29',
-      date_end: '2017-08-31',
-      status: 'Open',
-      type_work: 'Development'
-    },
-    400,
-    'Date end must be valid (0)'
-  ],
-  [
-    {
-      user: 1,
-      project: 'ets',
-      date_start: '2017-07-29',
-      date_end: '2017-00-31',
-      status: 'Open',
-      type_work: 'Development'
-    },
-    400,
-    'Date end must be valid (1)'
-  ],
-  [
-    {
-      user: 1,
-      project: 'ets',
-      date_start: '2016-01-29',
-      date_end: '2016-02-29',
-      status: 'Open',
-      type_work: 'Development'
-    },
-    200,
-    'Date end must be valid (2)'
-  ],
-  [
-    {
-      user: 1,
-      project: 'ets',
-      date_start: '2016-05-29',
-      date_end: '2016-02-29',
-      status: 'Open',
-      type_work: 'Development'
-    },
-    400,
-    'Date end must be after date to'
-  ],
-  [
-    {
-      user: 1,
-      project: 'ets',
-      date_start: '2017-07-29',
-      date_end: '2017-02-31',
-      status: 'Open',
-      type_work: 'Development'
-    },
-    400,
-    'Date end should be valid'
-  ],
-  [
-    {
-      user: 1,
-      project: 'ets',
       date_start: '2017-07-24',
       date_end: '2017-41-26',
       status: 'Open',
@@ -183,28 +111,6 @@ const createCredentials = [
     },
     400,
     'Project not exist'
-  ],
-  [
-    {
-      project: 'Very looooong titleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee!!!!!!!!',
-      task: 'test other controllers',
-      type_work: 'Development',
-      hours: '5.0',
-      date_task: '2017-07-26'
-    },
-    400,
-    'Very long project'
-  ],
-  [
-    {
-      project: 'NOrmal title of project',
-      task: new Array(500).join('x'),
-      type_work: 'Development',
-      hours: '5.0',
-      date_task: '2017-07-26'
-    },
-    400,
-    'Very long project'
   ],
   [
     {

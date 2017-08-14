@@ -42,7 +42,7 @@ router.get('/', users_list, async (req, res) => {
         knex('users')
           .select('first_name', 'last_name', 'roles', 'position', 'email', 'rate', 'id', 'locked')
           .where(criteriaForList(param))
-          .orderBy('first_name', 'asc')
+          .orderBy('created_at', 'desc')
           .asCallback(callback);
       }
     },

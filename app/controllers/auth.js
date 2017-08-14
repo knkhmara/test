@@ -1,43 +1,43 @@
-'use strict';
-const express = require('express');
+"use strict";
+const express = require("express");
 const router = express.Router();
-const knex = require('./../libs/knex');
-const bcrypt = require('bcrypt-nodejs');
-const crypto = require('crypto');
-const Validator = require('./../middlewares/validators/Validator');
-const { auth } = require('./../middlewares');
-const env = require('./../config');
-const jwt = require('jsonwebtoken');
+const knex = require("./../libs/knex");
+const bcrypt = require("bcrypt-nodejs");
+const crypto = require("crypto");
+const Validator = require("./../middlewares/validators/Validator");
+const { auth } = require("./../middlewares");
+const env = require("./../config");
+const jwt = require("jsonwebtoken");
 
-const User = require('./../models/user');
+const User = require("./../models/user");
 
 /* Auth user */
-router.post('/', (req, res, next) => {
+router.post("/", (req, res, next) => {
   const rules = {
-    email: 'required|email|email_exist',
-    password: 'required|min:5'
+    email: "required|email|email_exist",
+    password: "required|min:5"
   };
 
   const validate = new Validator(req.body, rules);
 
   validate.passes(() => {
     // get email and check password
-    knex('users')
-      .where('email', req.body.email)
-      .select('id', 'password')
-      .where('locked', 0)
+    knex("users")
+      .where("email", req.body.email)
+      .select("id", "password")
+      .where("locked", 0)
       .first()
       .then(data => {
         if (data) {
           if (bcrypt.compareSync(req.body.password, data.password)) {
             // generate token
             const token = jwt.sign({ id: data.id }, env.secret, {
-              expiresIn: '120d'
+              expiresIn: "120d"
             });
             User.getById(data.id, (err, user) => {
               if (err) return next(err);
               if (user) {
-                user['token'] = token;
+                user["token"] = token;
                 return res.json(user);
               }
             });
@@ -54,6 +54,6 @@ router.post('/', (req, res, next) => {
 });
 
 /* Me */
-router.get('/me', auth, (req, res) => res.json(req._user));
+router.get("/me", auth, (req, res) => res.json(req._user));
 
 module.exports = router;

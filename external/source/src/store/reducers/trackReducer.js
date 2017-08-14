@@ -8,8 +8,7 @@ import {
   SET_STATUS_TYPES,
   SET_TRACK_FILTER,
   CLEAR_TRACK_FILTERS,
-  CHANGE_TRACK_VIEW,
-  NEED_UPD_LIST
+  CHANGE_TRACK_VIEW
 } from './../actions/types';
 
 // Helpers
@@ -19,7 +18,6 @@ const initFilters = getInitFiltersForTrack();
 const initTrackData = getInitNewTrackData();
 const view = localStorage.getItem('viewType');
 const initial = {
-  _need_upd_list: false,
   tracks: [],
   workTypes: [],
   statusTypes: [],
@@ -33,8 +31,6 @@ const initial = {
 
 export default function trackReducer(state = initial, action = {}) {
   switch (action.type) {
-    case NEED_UPD_LIST:
-      return Object.assign({}, state, action.payload);
     case SET_TRACKS:
       return Object.assign({}, state, { tracks: action.tracks });
     case CHANGE_TRACK_VIEW:
