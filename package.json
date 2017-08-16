@@ -22,7 +22,7 @@
     "mysql": "^2.13.0",
     "serve-favicon": "~2.4.2",
     "validatorjs": "^3.13.3",
-    "forewer": "0.15.3"
+    "forever": "^0.15.3"
   },
   "devDependencies": {
     "mocha": "^3.4.2",
